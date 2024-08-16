@@ -9,7 +9,7 @@
     "_native": "",
     "sample": 18,
     "speed": 0.5,
-    "wrapMode": 1,
+    "wrapMode": 2,
     "enableTrsBlending": false,
     "_duration": 0.9444444444444444,
     "_hash": 500763545,
@@ -19,18 +19,7 @@
       }
     ],
     "_exoticAnimation": null,
-    "_events": [
-      {
-        "frame": 0.9444444444444444,
-        "func": "",
-        "params": []
-      },
-      {
-        "frame": 0.9444444444444444,
-        "func": "midAnimationDecisionEnd",
-        "params": []
-      }
-    ],
+    "_events": [],
     "_embeddedPlayers": [],
     "_additiveSettings": {
       "__id__": 6

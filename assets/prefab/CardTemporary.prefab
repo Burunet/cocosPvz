@@ -599,7 +599,7 @@
     "cardMask": {
       "__id__": 20
     },
-    "cdTime": 5,
+    "cdTime": 7.5,
     "needSunPoint": 50,
     "_id": ""
   },
@@ -616,6 +616,7 @@
       "__id__": 0
     },
     "fileId": "33OCJkAgpH/JWucuJMI0CA",
+    "instance": null,
     "targetOverrides": null
   }
 ]

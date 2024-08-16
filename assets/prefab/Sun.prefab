@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "SunFlower",
+    "_name": "Sun",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "SunFlower",
+    "_name": "Sun",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -28,20 +28,14 @@
       },
       {
         "__id__": 6
-      },
-      {
-        "__id__": 8
-      },
-      {
-        "__id__": 10
       }
     ],
     "_prefab": {
-      "__id__": 12
+      "__id__": 8
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 100000000,
+      "x": 0,
       "y": 0,
       "z": 0
     },
@@ -54,8 +48,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1.5,
-      "y": 1.6,
+      "x": 1.3,
+      "y": 1.3,
       "z": 1
     },
     "_mobility": 0,
@@ -82,8 +76,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 63,
-      "height": 72
+      "width": 66,
+      "height": 65
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -94,7 +88,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "46ZviKR65KoavJzbYwafZz"
+    "fileId": "60S1VY8FJH+Jv5AJ6UUr2l"
   },
   {
     "__type__": "cc.Sprite",
@@ -119,7 +113,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "6b1b30de-9155-482c-b0f3-ed814a50ba7e@f9941",
+      "__uuid__": "b10f1df2-d8eb-4ab4-9c20-bb254f6d3078@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -132,14 +126,14 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": false,
+    "_isTrimmedMode": true,
     "_useGrayscale": false,
     "_atlas": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "7e+rzTkohI/6oezNTjScY/"
+    "fileId": "abVzgsBYROSJhkLHPTJGfl"
   },
   {
     "__type__": "cc.Animation",
@@ -156,65 +150,23 @@
     "playOnLoad": true,
     "_clips": [
       {
-        "__uuid__": "6f760cd0-fb8c-416e-94bf-df68736b66ca",
+        "__uuid__": "e019083d-ec5f-47d8-9786-f02015709513",
         "__expectedType__": "cc.AnimationClip"
       },
       {
-        "__uuid__": "fb11138e-2d6b-4215-99a3-928bb8315f73",
+        "__uuid__": "021673c3-c53f-4e48-a0ef-43e0ce1c452b",
         "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "6f760cd0-fb8c-416e-94bf-df68736b66ca",
+      "__uuid__": "e019083d-ec5f-47d8-9786-f02015709513",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "a0qqXsC+hLpay3kPAyOvFV"
-  },
-  {
-    "__type__": "2fad6p+SytODKT+BwrW1wUy",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 9
-    },
-    "PlantType": 0,
-    "PlantTime": 10,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "62aq+VV7dL/YNSB0Wx1fCs"
-  },
-  {
-    "__type__": "f69cb9GJChLmazi8yUQRh1W",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 11
-    },
-    "sunPrefab": {
-      "__uuid__": "1f246f50-2aef-4d75-ad07-0a5e9ce82b33",
-      "__expectedType__": "cc.Prefab"
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "57NaQoRqxBCYSwLIuNKSRA"
+    "fileId": "6aAW9igBhL0JKAiCUa9rOi"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -224,7 +176,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "0fqvHbn+pIurxKlY7+BfSo",
+    "fileId": "713z1v3c9Ffpyn0hMXKxQ3",
     "instance": null,
     "targetOverrides": null
   }
