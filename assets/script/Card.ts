@@ -1,4 +1,4 @@
-import { _decorator, Component, Enum, Node, Sprite } from 'cc';
+import { _decorator, Component, Enum, EventMouse, Node, Sprite } from 'cc';
 import {CardState,PlantType} from './manager/Global';
 import { GlobalManager } from './manager/GlobalManager';
 import { MouseManager } from './manager/MouseManager';
@@ -35,10 +35,10 @@ export class Card extends Component {
                 this.coolingUpdate(deltaTime);
                 break;
             case CardState.WaitingSun:
-                this.waitingSunUpdate
+                this.changeState(GlobalManager.Instance.SunPoint>=this.needSunPoint?CardState.Ready:CardState.WaitingSun)
                 break;
             case CardState.Ready:
-                this.readyUpdate
+                this.changeState(GlobalManager.Instance.SunPoint>=this.needSunPoint?CardState.Ready:CardState.WaitingSun)
                 break;
         }
     }
@@ -48,13 +48,6 @@ export class Card extends Component {
         if(this.cdTimer<=0){  // 冷却结束判断阳光
             this.changeState(GlobalManager.Instance.SunPoint>=this.needSunPoint?CardState.Ready:CardState.WaitingSun)
         }
-    }
-    waitingSunUpdate(){
-        this.changeState(GlobalManager.Instance.SunPoint>=this.needSunPoint?CardState.Ready:CardState.WaitingSun)
-    }
-
-    readyUpdate(){
-        this.changeState(GlobalManager.Instance.SunPoint>=this.needSunPoint?CardState.Ready:CardState.WaitingSun)
     }
     //修改卡牌状态
     changeState(state:CardState){
@@ -72,15 +65,24 @@ export class Card extends Component {
                 this.cardLight.active = true;
                 this.cardGrey.active = false;
                 break;
+            case CardState.Click:
+                this.cardMask.fillRange=1;
+            break;
         }
     }
     //点击了卡片开始种植物
-    AtClick(){
-        console.log('点击浏览');
-        MouseManager.Instance.addPlant(this.PlantType);
-        if(GlobalManager.Instance.subSun(-this.needSunPoint)){
-            this.changeState(CardState.Cooling)
+    AtClick(event:EventMouse){
+        //阳光判断
+        if(this.needSunPoint > GlobalManager.Instance.SunPoint ) return;
+
+        if(MouseManager.Instance.addPlant(this.PlantType,event)){
+            //预设值
+            MouseManager.Instance.needSunPointCase = this.needSunPoint;
+            MouseManager.Instance.plantCard =this;
+            //修改卡片状态为举起
+            this.changeState(CardState.Click);
         }
+        
     }
 }
 

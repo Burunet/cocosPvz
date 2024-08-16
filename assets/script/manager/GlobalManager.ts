@@ -6,8 +6,10 @@ export class GlobalManager extends Component {
 
     private static _instance: GlobalManager =null;
 
+    //阳光值
     @property({type:Number,tooltip:'阳光值'})
-    private sunPoint:number = 0;    //阳光值
+    private sunPoint:number = 0;
+
     @property({type:Label,tooltip:'阳光值UI'})
     private sunPointLabel:Label = null;
 
