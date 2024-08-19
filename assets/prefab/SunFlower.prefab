@@ -54,8 +54,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1.5,
-      "y": 1.6,
+      "x": 1.4,
+      "y": 1.5,
       "z": 1
     },
     "_mobility": 0,
@@ -187,7 +187,9 @@
       "__id__": 9
     },
     "PlantType": 0,
-    "PlantTime": 10,
+    "PlantTimeMin": 23.5,
+    "PlantTimeMax": 25,
+    "PlantHP": 300,
     "_id": ""
   },
   {

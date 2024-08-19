@@ -1,5 +1,5 @@
 import { _decorator, Component, Enum, EventMouse, Node, Sprite } from 'cc';
-import {CardState,PlantType} from './manager/Global';
+import {CardState,GameState,PlantType} from './manager/Global';
 import { GlobalManager } from './manager/GlobalManager';
 import { MouseManager } from './manager/MouseManager';
 const { ccclass, property } = _decorator;
@@ -7,7 +7,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Card')
 export class Card extends Component {
     //卡片状态
-    private cardState:CardState = CardState.Cooling;
+    private cardState:CardState = CardState.NoShow;
     
     @property({type:Enum(PlantType)})
     public PlantType:PlantType;  //卡牌类型 --植物
@@ -30,6 +30,12 @@ export class Card extends Component {
     }
 
     update(deltaTime: number) {
+        if(MouseManager.Instance.gameState==GameState.Afoot && this.cardState == CardState.NoShow){
+            console.log('aaa');
+            
+            this.cardState = CardState.Cooling
+            this.changeState(CardState.Cooling);
+        }
         switch (this.cardState) {
             case CardState.Cooling:
                 this.coolingUpdate(deltaTime);
@@ -42,6 +48,7 @@ export class Card extends Component {
                 break;
         }
     }
+    //卡槽冷却
     coolingUpdate(dt:number){
         this.cdTimer-=dt;
         this.cardMask.fillRange=-(this.cdTimer/this.cdTime);
@@ -53,28 +60,46 @@ export class Card extends Component {
     changeState(state:CardState){
         switch (state) {
             case CardState.Cooling:
+                this.cardState =state
                 this.cardLight.active = false;
                 this.cardGrey.active = true;
                 this.cdTimer = this.cdTime;
                 break;
             case CardState.WaitingSun:
+                this.cardState =state
                 this.cardLight.active = false;
                 this.cardGrey.active = true;
                 break;
             case CardState.Ready:
+                this.cardState =state
                 this.cardLight.active = true;
                 this.cardGrey.active = false;
                 break;
             case CardState.Click:
+                this.cardState =state
                 this.cardMask.fillRange=1;
             break;
+            case CardState.NoShow:
+                this.cardState =state
+                this.cardLight.active = true;
+                this.cardGrey.active = false;
+                this.cardMask.fillRange=1;
+            break;
+            
         }
     }
     //点击了卡片开始种植物
     AtClick(event:EventMouse){
-        //阳光判断
-        if(this.needSunPoint > GlobalManager.Instance.SunPoint ) return;
+        if(MouseManager.Instance.currentPlant != null  && this.cardState == CardState.Click){
+            MouseManager.Instance.currentPlant.destroy();
+            MouseManager.Instance.currentPlant = null;
+            this.changeState(CardState.Ready);
+            return;
+        }
 
+        if(this.cardState != CardState.Ready ) return;    //卡牌状态是否为等待种植
+        if(this.needSunPoint > GlobalManager.Instance.SunPoint ) return; //阳光判断
+        
         if(MouseManager.Instance.addPlant(this.PlantType,event)){
             //预设值
             MouseManager.Instance.needSunPointCase = this.needSunPoint;

@@ -1,4 +1,4 @@
-import { _decorator, Component, EventMouse, log, Node } from 'cc';
+import { _decorator, AudioSource, Component, EventMouse, log, Node } from 'cc';
 import { MouseManager } from './MouseManager';
 import { CellState } from './Global';
 
@@ -7,6 +7,8 @@ const { ccclass, property } = _decorator;
 @ccclass('Cell')
 export class Cell extends Component {
 
+    @property(AudioSource)
+    public audioSource: AudioSource | null = null;
     //格子状态
     private cellState:CellState=CellState.None;
 
@@ -20,8 +22,6 @@ export class Cell extends Component {
     }
 
     OnMouseDown(event:EventMouse){
-        console.log('执行了');
-        
         MouseManager.Instance.onCellClick(this)
     }
 

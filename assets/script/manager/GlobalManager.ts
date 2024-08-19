@@ -1,4 +1,5 @@
-import { _decorator, Component, Label, Node } from 'cc';
+import { _decorator, Component, find, instantiate, Prefab ,Node } from 'cc';
+import { CardList } from './CardList';
 const { ccclass, property } = _decorator;
 
 @ccclass('GlobalManager')
@@ -10,8 +11,12 @@ export class GlobalManager extends Component {
     @property({type:Number,tooltip:'阳光值'})
     private sunPoint:number = 0;
 
-    @property({type:Label,tooltip:'阳光值UI'})
-    private sunPointLabel:Label = null;
+    private cardList:Node;
+    //卡槽预设
+    @property(Prefab)
+    public cardListPrefab:Prefab;
+    @property(Prefab)
+    public gameCardList:Prefab;
 
     //获取实例
     public static get Instance():GlobalManager{
@@ -27,23 +32,29 @@ export class GlobalManager extends Component {
             return;
         }
     }
+    protected start(): void {
+        let gameCardList = instantiate(this.gameCardList);
+        gameCardList.parent = this.node;
+    }
+
      //公共访问器： 阳光的获取
      public get  SunPoint() : number {
         return this.sunPoint;
     }
-    start() {
-        this.updateSunPointLabel()
+    creatCardList(){
+        this.cardList = instantiate(this.cardListPrefab);
+        this.cardList.parent = this.node;
+        let cardListScript = this.cardList.getComponent(CardList)
+        cardListScript.updateSunPointLabel(this.sunPoint)
+        cardListScript.startInit();
     }
-    //修改ui阳光值
-    updateSunPointLabel():void{
-        this.sunPointLabel.string = this.sunPoint.toString();
-    }
+
 
     //阳光的加减
     public subSun(point:number):boolean{
         if(this.sunPoint-point<0)return false;
         this.sunPoint+=point;
-        this.updateSunPointLabel()
+        this.cardList.getComponent(CardList).updateSunPointLabel(this.sunPoint)
         return true;
 
     }

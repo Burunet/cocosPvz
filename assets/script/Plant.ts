@@ -12,33 +12,21 @@ export class Plant extends Component {
     @property({type:Enum(PlantType)})
     public PlantType:PlantType;  //卡牌类型 --植物
 
-    @property({type:Number,tooltip:'生效间隔 +1s动画时间'})
-    public PlantTime:number = 5;
+    @property({type:Number,tooltip:'生效间隔min'})
+    public PlantTimeMin:number = 5;
+    @property({type:Number,tooltip:'生效间隔max'})
+    public PlantTimeMax:number = 10;
 
-    private cdTime;  //生效计时
+    @property({type:Number,tooltip:'HP'})
+    public PlantHP:number = 300;
+
+    public cdTime;  //生效计时
 
     start() {
         this.plantStart();; //初始化
         this.transitionToDisable()
     }
 
-    update(deltaTime: number) {
-        switch (this.plantState) {
-            case PlantState.Enable:
-                this.enableUpdate(deltaTime);
-                break;
-        }
-    }
-
-    disableUpdate(){
-    }
-    //激活状态执行
-    enableUpdate(time:number){
-        this.cdTime -=time;
-        if(this.cdTime<=0){
-            this.plantState=PlantState.EnableHodel;
-        }
-    }
     // 转到未激活
     transitionToDisable(){
         this.plantState=PlantState.Disable;
@@ -49,14 +37,14 @@ export class Plant extends Component {
         this.plantState=PlantState.Enable;
         this.getComponent(Animation).enabled = true;
     }
-    //转到生产
+    //转到 待生产
     transitionToEnableHodel(){
-
+        this.plantState = PlantState.EnableHodel
     }
     
-
-    plantStart(){
-        this.cdTime = this.PlantTime;
+    //重置作用cd
+    plantStart(time:number=0){
+        this.cdTime = time==0?Math.random() * (this.PlantTimeMax - this.PlantTimeMin) + this.PlantTimeMin:time;
     }
 
 }
