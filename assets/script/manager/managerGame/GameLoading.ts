@@ -1,14 +1,13 @@
 import { _decorator, AudioSource, Component, find, instantiate, Node, Prefab } from 'cc';
-import { MouseManager } from './MouseManager';
-import { GameState } from './Global';
+import { MouseManager } from '../MouseManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameLoading')
 export class GameLoading extends Component {
-    //存在的植物预设
+    //好 准备 开始 动画贴图
     @property([Prefab])
     public startPrefabArray:Prefab[]=[];
-
+    //音乐资源
     @property(AudioSource)
     public audioSource: AudioSource | null = null;
     

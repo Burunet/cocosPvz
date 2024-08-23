@@ -1,12 +1,12 @@
-import { _decorator, AudioSource, Component, EventMouse, find, input, Input, instantiate, Node, Prefab, Vec3 } from 'cc';
+import { _decorator, AudioSource, Component, EventMouse, find, input, Input, instantiate, log, Node, Prefab, Vec3 } from 'cc';
 import { PlantType,CardState, CellState, GameState } from './Global';
 import { Plant } from '../Plant';
-import { Cell } from './Cell';
+import { Cell } from '../Game/Cell';
 import { GlobalManager } from './GlobalManager';
 import { Card } from '../Card';
-import { CardList } from './CardList';
-import { GameLoading } from './GameLoading';
+import { GameLoading } from './managerGame/GameLoading';
 import { Camera } from './Camera';
+import { ZombieManager } from './ZombieManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('MouseManager')
@@ -94,19 +94,22 @@ export class MouseManager extends Component {
     }
     //点击格子种植
     onCellClick(cell:Cell){
-        if(this.currentPlant==null)return; //不存在植物实体
+        
         if(cell.nowCellState()) return; //格子不支持
         //扣除阳光-进入冷却
         GlobalManager.Instance.subSun(-this.needSunPointCase)
         this.plantCard.changeState(CardState.Cooling)
-        
+
         //设置植物,修改植物父级
-        this.currentPlant.parent = cell.node;
-        let position = new Vec3(0,0,0);
+        let plantCell = cell.node.parent.getChildByName('Plant');
+        this.currentPlant.parent =plantCell;
+
+        let position = new Vec3( cell.node.position.x,0,0);
         this.currentPlant.setPosition(position);
 
         // 获取植物脚本
         let plantScript = this.currentPlant.getComponent(Plant);
+        plantScript.CellName = cell.node.name;
         if (plantScript) {
             cell.audioSource.play() //播放种植音乐
             plantScript.transitionToEnable();  // 激活植物
@@ -114,22 +117,13 @@ export class MouseManager extends Component {
             console.error("Failed to retrieve Plant script from currentPlant");
         }
         //释放当前植物-清除预设
-        this.needSunPointCase=0;
-        this.plantCard = null;
-        this.currentPlant = null;
+        this.onFund()
         //将格子状态修改为 have
         cell.changeCellState(CellState.Have);
     }
 
 
-    //获取实例
-    public static get Instance():MouseManager{
-        return this._instance;
-    }
-    //节点-销毁处理
-    protected onDestroy(): void {
-        input.off(Input.EventType.MOUSE_MOVE,this.onMouseMove,this)
-    }
+   
 // 转到游戏加载中
     transitionToLoading(){
         this.gameState = GameState.Loading;
@@ -138,7 +132,7 @@ export class MouseManager extends Component {
             //摄像机移动预设位置
             let camera = find('Canvas/Camera').getComponent(Camera);
             camera.state=true;
-        },1000)
+        },2000)
     }
         //摄像头到达预定位置后执行
         toLoading(){
@@ -148,14 +142,13 @@ export class MouseManager extends Component {
         }
 // 转到游戏进行中
     transitionToAfoot(){
-        // for(let audioSourceb of this.audioSourcebArray){
-        //     audioSourceb.stop();
-        // }
         find('Canvas/Manager/gameLoading').destroy()
         find('Canvas/Camera').getComponent(Camera).onMovetoAction()
         this.ReadyAudio(0);
         this.gameState = GameState.Afoot;
         this.node.getComponent(GlobalManager).creatCardList()
+        //触发僵尸创建
+        ZombieManager.Instance.createZombie()
     }
     //BGM 控制
     ReadyAudio(num:number){
@@ -163,6 +156,22 @@ export class MouseManager extends Component {
             audioSourceb.stop();
         }
          this.audioSourcebArray[num].play()
+    }
+
+     //获取实例
+     public static get Instance():MouseManager{
+        return this._instance;
+    }
+    //节点-销毁处理
+    protected onDestroy(): void {
+        input.off(Input.EventType.MOUSE_MOVE,this.onMouseMove,this)
+    }
+
+//释放当前对象-清除预设
+    onFund(){
+        this.needSunPointCase=0;
+        this.plantCard = null;
+        this.currentPlant = null;
     }
 }
 

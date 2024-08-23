@@ -1,5 +1,6 @@
-import { _decorator, Animation, Component, Enum, Node } from 'cc';
-import { PlantType,PlantState } from './manager/Global';
+import { _decorator, Animation, CCFloat, Component, Enum, Node } from 'cc';
+import { PlantType,PlantState, CellState } from './manager/Global';
+import { Cell } from './Game/Cell';
 const { ccclass, property } = _decorator;
 
 //植物脚本
@@ -12,19 +13,27 @@ export class Plant extends Component {
     @property({type:Enum(PlantType)})
     public PlantType:PlantType;  //卡牌类型 --植物
 
-    @property({type:Number,tooltip:'生效间隔min'})
+    @property({type: CCFloat,tooltip:'生效间隔min'})
     public PlantTimeMin:number = 5;
-    @property({type:Number,tooltip:'生效间隔max'})
+    @property({type: CCFloat,tooltip:'生效间隔max'})
     public PlantTimeMax:number = 10;
+    
 
-    @property({type:Number,tooltip:'HP'})
+    @property({type: CCFloat,tooltip:'HP'})
     public PlantHP:number = 300;
 
-    public cdTime;  //生效计时
+    public cdTime:number;  //生效计时
+    public CellName:string;
 
     start() {
         this.plantStart();; //初始化
         this.transitionToDisable()
+    }
+    protected update(dt: number): void {
+        if(this.PlantHP<=0){  //监听植物血量
+            this.node.parent.parent.getChildByName(this.CellName).getComponent(Cell).changeCellState(CellState.None)
+            this.node.destroy();
+        }
     }
 
     // 转到未激活
@@ -44,7 +53,12 @@ export class Plant extends Component {
     
     //重置作用cd
     plantStart(time:number=0){
-        this.cdTime = time==0?Math.random() * (this.PlantTimeMax - this.PlantTimeMin) + this.PlantTimeMin:time;
+        if(this.PlantTimeMax - this.PlantTimeMin>0){
+            this.cdTime = time==0? Math.random() * (this.PlantTimeMax - this.PlantTimeMin)+ this.PlantTimeMin:time;
+        }else{
+            this.cdTime = time==0?this.PlantTimeMin:time;
+        }
+        
     }
 
 }

@@ -1,4 +1,4 @@
-import { _decorator, Component, Enum, EventMouse, Node, Sprite } from 'cc';
+import { _decorator, CCFloat, Component, Enum, EventMouse, Node, Sprite } from 'cc';
 import {CardState,GameState,PlantType} from './manager/Global';
 import { GlobalManager } from './manager/GlobalManager';
 import { MouseManager } from './manager/MouseManager';
@@ -18,11 +18,11 @@ export class Card extends Component {
     @property(Sprite)
     public cardMask: Sprite = null; //遮罩层
 
-    @property({type:Number,tooltip:'卡牌冷却时间'})
+    @property({type:CCFloat,tooltip:'卡牌冷却时间'})
     public cdTime:number = 5;  //卡牌冷却时间
     private cdTimer:number;  //卡牌冷却计时
 
-    @property({type:Number,tooltip:'植物需要的阳光点数'})
+    @property({type:CCFloat,tooltip:'植物需要的阳光点数'})
     private needSunPoint:number =150;  //需要的阳光值
 
     start() {
@@ -31,8 +31,6 @@ export class Card extends Component {
 
     update(deltaTime: number) {
         if(MouseManager.Instance.gameState==GameState.Afoot && this.cardState == CardState.NoShow){
-            console.log('aaa');
-            
             this.cardState = CardState.Cooling
             this.changeState(CardState.Cooling);
         }

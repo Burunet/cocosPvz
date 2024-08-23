@@ -85,9 +85,9 @@ export class Sunflower extends Component {
         sun.parent = find('Canvas/ForeGround'); //设置阳光父节点
         let sunScript = sun.getComponent(SunEffect);  //取得阳光脚本
 
-        let SunPosition =this.node.parent.position; //取得当前植物格子的位置
+        let SunPosition =this.node.position; //取得当前植物的位置
         //以植物位置来创建阳光-阳光生成的初始位置
-        let newSunPosition = new Vec3(SunPosition.x+10,SunPosition.y -50,0);
+        let newSunPosition = new Vec3(SunPosition.x+10,this.node.parent.parent.position.y -30,0);
         sun.setPosition(newSunPosition);
 
          //转回激活状态 重置生产等待时间

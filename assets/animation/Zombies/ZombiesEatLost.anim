@@ -1,0 +1,239 @@
+[
+  {
+    "__type__": "cc.AnimationClip",
+    "_name": "ZombiesEatLost",
+    "_objFlags": 0,
+    "__editorExtras__": {
+      "embeddedPlayerGroups": []
+    },
+    "_native": "",
+    "sample": 10,
+    "speed": 0.3,
+    "wrapMode": 2,
+    "enableTrsBlending": false,
+    "_duration": 1.1,
+    "_hash": 500763545,
+    "_tracks": [
+      {
+        "__id__": 1
+      }
+    ],
+    "_exoticAnimation": null,
+    "_events": [
+      {
+        "frame": 0,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.1,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.1,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.2,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.2,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.3,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.3,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.4,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.4,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.5,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.5,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.6,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.6,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.7,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.7,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.8,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.8,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 0.9,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 0.9,
+        "func": "eatPlant",
+        "params": []
+      },
+      {
+        "frame": 1,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 1,
+        "func": "eatPlant",
+        "params": []
+      }
+    ],
+    "_embeddedPlayers": [],
+    "_additiveSettings": {
+      "__id__": 6
+    },
+    "_auxiliaryCurveEntries": []
+  },
+  {
+    "__type__": "cc.animation.ObjectTrack",
+    "_binding": {
+      "__type__": "cc.animation.TrackBinding",
+      "path": {
+        "__id__": 2
+      },
+      "proxy": null
+    },
+    "_channel": {
+      "__id__": 4
+    }
+  },
+  {
+    "__type__": "cc.animation.TrackPath",
+    "_paths": [
+      {
+        "__id__": 3
+      },
+      "spriteFrame"
+    ]
+  },
+  {
+    "__type__": "cc.animation.ComponentPath",
+    "component": "cc.Sprite"
+  },
+  {
+    "__type__": "cc.animation.Channel",
+    "_curve": {
+      "__id__": 5
+    }
+  },
+  {
+    "__type__": "cc.ObjectCurve",
+    "_times": [
+      0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1
+    ],
+    "_values": [
+      {
+        "__uuid__": "49201e8c-c02d-4e74-ae7a-7e4ea1be4b08@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "d6e21a95-effd-4fa9-ab45-fe5ebe16ae4d@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "a9b9ebd3-5235-464f-b4e2-2ec3b49249e7@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "dc9db4ae-ebfb-4576-8d90-df9dcb40c934@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "a432b7d3-0f93-4b7d-8293-afa52c68095f@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "e4301889-d088-467e-a4b4-9bb7ed6a66c6@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "dcbf69f1-84a1-46bd-8a69-7cf0f61e1e7b@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "0a5b1692-dfc4-41f3-ab1d-704b78f4894a@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "eea6350d-7644-47fe-9e9b-fa7905d5b246@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "066553b0-1ddb-47a5-ba25-d40fb973a736@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "4fcf18ee-bd3e-40b6-88a0-fa43dae65b94@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      }
+    ]
+  },
+  {
+    "__type__": "cc.AnimationClipAdditiveSettings",
+    "enabled": false,
+    "refClip": null
+  }
+]

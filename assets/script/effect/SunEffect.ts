@@ -1,4 +1,4 @@
-import { _decorator, Component, Animation, find, Vec3, AudioSource } from 'cc';
+import { _decorator, Component, Animation, find, Vec3, AudioSource, log } from 'cc';
 import {SunState} from '../manager/Global'
 import { GlobalManager } from '../manager/GlobalManager';
 const { ccclass, property } = _decorator;
@@ -10,7 +10,6 @@ export class SunEffect extends Component {
     private endPosition:any; //点击阳光后阳光要飘去的位置
     private moveX:number=0;
     private moveY:number=0;
-    private addSun:number =25  //该阳光加的阳光数
 
     // @property(AudioSource)
     // public audioSource: AudioSource | null = null;
@@ -33,7 +32,7 @@ export class SunEffect extends Component {
             this.node.setPosition(newPosition)
             
             if(newPosition.x < this.endPosition.x+50 && newPosition.x>this.endPosition.x-50 && newPosition.y > this.endPosition.y){
-                GlobalManager.Instance.subSun(this.addSun);
+                
                 this.node.destroy()
             }
 
@@ -52,6 +51,8 @@ export class SunEffect extends Component {
         this.moveY = Math.abs(position.y-this.endPosition.y)/30
         // 播放音效
         this.node.getComponent(AudioSource).play()
+        //向日葵产阳光 +25
+        GlobalManager.Instance.subSun(25);
     }
 
     // playSound() {

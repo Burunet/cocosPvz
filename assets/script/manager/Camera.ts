@@ -23,7 +23,10 @@ export class Camera extends Component {
             //摄像头到达预定位置
             if(this.moveNum<=0){
                 this.state=false;
-                MouseManager.Instance.toLoading();
+                setTimeout(()=>{
+                    MouseManager.Instance.toLoading();
+                },1000)
+               
             }
         }
     }
